@@ -7,9 +7,9 @@ const reduce = (grid, coor) => {
     let queue = [coor]
     while (queue.length > 0) {
         let curr = queue.shift()
-        if (grid[curr[0]][curr[1]] === '1') {
-            grid[curr[0]][curr[1]] = '0'
-        }
+        // if (grid[curr[0]][curr[1]] === '1') {
+        //     grid[curr[0]][curr[1]] = '0'
+        // }
         neighbors = [
             [curr[0] - 1, curr[1]],
             [curr[0], curr[1] + 1],
@@ -20,13 +20,15 @@ const reduce = (grid, coor) => {
             if (neighbor[0] < 0 || 
                 neighbor[1] < 0 || 
                 neighbor[0] >= grid.length ||
-                neighbor[1] >= grid[0].length
+                neighbor[1] >= grid[0].length ||
+                grid[neighbor[0]][neighbor[1]] === '0'
                ) {
-                continue;
-            } else if (grid[neighbor[0]][neighbor[1]] === '0') {
                 continue;
             } else {
                 queue.push(neighbor)
+                // mark that we visited it right when we visit it,
+                // otherwise in original solution I had tons of dups
+                grid[neighbor[0]][neighbor[1]] === '0'
             }
         }
     }
