@@ -28,5 +28,5 @@ var smallestCommonElement = function(mat) {
     if (leastOcc === Infinity) {
         return -1
     }
-return leastOcc
+    return leastOcc
 };
